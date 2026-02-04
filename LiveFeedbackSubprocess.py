@@ -43,6 +43,8 @@ class LiveFeedbackSubprocess:
         self._buffer.close()
         return (success, output)
 
+    # FIXME: It seems that there is some sort of "delay" between the process and user IO.
+
     def _handle_output(self, stream, mask) -> None:
         line = stream.readline()
         self._buffer.write(line)
