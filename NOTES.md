@@ -11,7 +11,7 @@ Important things about edax v 4.6
 * `setboard` is set using `play_set_board(play, param)` in LC 416 of `edax.c`.
 * `play_go()` uses `search_run()`.
 * `search_run()` is defined in `src/root.c`, LC 837.
-* `search_run()` is what we are looking for, since it search for the best move in a given board.
+* `search_run()` is what we are looking for, since it searches for the best move in a given board.
     * the board has been set using `search_set_board()`;
     * all search options are also set using `search_set_board()`;
     * it returns the search result, which is an integer, essentially a status code - useless for our purposes;
