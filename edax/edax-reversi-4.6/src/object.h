@@ -3,9 +3,10 @@
 
 #include <stdlib.h>
 
-#define ALLOCATE_OBJECT(type, object_type) \
-    (type*)(sizeof(type), object_type)
+#define ALLOCATE_OBJECT(type) \
+    (type*)mallocate(sizeof(type))
 
-// TODO: Fix this to check for NULLs and allocate properly!
+void* mallocate(size_t);
+
 
 #endif
