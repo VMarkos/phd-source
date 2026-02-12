@@ -1,7 +1,9 @@
 #include <stdlib.h>
+#include "root.h"
 #include "agent.h"
 #include "move.h"
 #include "object.h"
+#include "search.h"
 
 // Owns Board* board. Owns depth (evidently).
 
@@ -23,8 +25,12 @@ void agent_destroy(Agent** agent_p) {
     *agent_p = NULL;
 }
 
-Move* agent_get_best_move() {
-
+Move* agent_get_best_move(Agent* agent) {
+    Search* search = ALLOCATE_OBJECT(Search);
+    search_init(search);
+    search->options.depth = agent->depth; // TODO find how to use the board in search_run
+    int search_success = search_run(search);
+    
 }
 
 // Thin wrapper around `board_set()`.

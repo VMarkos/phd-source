@@ -10,13 +10,13 @@ typedef struct Agent {
 } Agent;
 
 // Constructor
-Agent* agent_create(char*, int);
+Agent* agent_create(const char*, int);
 
 // Destructor
 void agent_destroy(Agent**);
 
 // Get best move as per Edax
-Move* agent_get_best_move();
+Move* agent_get_best_move(Agent*);
 
 // Parse SGF string to Edax Board
 void agent_parse_board_string(const char*, Board*);
