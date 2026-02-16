@@ -28,9 +28,13 @@ void agent_destroy(Agent** agent_p) {
 Move* agent_get_best_move(Agent* agent) {
     Search* search = ALLOCATE_OBJECT(Search);
     search_init(search);
+    search_set_board(search, board, board->player); // FIXME: Compute the player's turn to play
     search->options.depth = agent->depth; // TODO find how to use the board in search_run
     int search_success = search_run(search);
-    
+    int move_index = search->result->move;
+    Move* move;
+    board_get_move(agent->board, move_index, move);
+    return move;    
 }
 
 // Thin wrapper around `board_set()`.
