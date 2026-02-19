@@ -31,6 +31,10 @@ ifeq ($(CC),cc)
 	CC=clang
 endif
 
+ifeq ($(ARCH),)
+	ARCH=x86-64
+endif
+
 #clang
 ifeq ($(CC),clang)
 	CFLAGS = -std=c17 -pedantic -W -Wall -Wno-invalid-source-encoding -D_GNU_SOURCE=1
@@ -109,11 +113,12 @@ ifeq ($(OS),osx)
 	EXE = mEdax-$(ARCH)
 endif
 
+AGENT_EXE = aEdax-$(ARCH)
+
 #SRC
-# TODO: You are here trying to create a proper library
-SRC= bit.c board.c move.c crc32c.c hash.c ybwc.c eval.c endgame.c midgame.c root.c search.c \
-book.c opening.c game.c base.c perft.c obftest.c util.c event.c histogram.c \
-stats.c options.c play.c ui.c edax.c cassio.c gtp.c ggs.c nboard.c xboard.c main.c   
+SRC= agent.c bit.c board.c move.c crc32c.c hash.c ybwc.c eval.c endgame.c midgame.c root.c search.c \
+book.c opening.c game.c base.c perft.c obftest.c object.c util.c event.c histogram.c \
+stats.c options.c edax.c cassio.c gtp.c ggs.c nboard.c xboard.c agent_main.c
 
 # RULES
 help:
@@ -150,6 +155,11 @@ help:
 build:
 	@echo "building edax..."
 	$(CC) $(CFLAGS) $(DFLAGS) all.c -o $(BIN)/$(EXE) $(LIBS)
+
+# Edax agent build
+agent-build:
+	@echo "building edax agent..."
+	$(CC) $(CFLAGS) $(DFLAGS) $(SRC) -o $(BIN)/$(AGENT_EXE) $(LIBS)
 
 pgo-build:
 	@echo "building edax with pgo..."

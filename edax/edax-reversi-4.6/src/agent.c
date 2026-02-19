@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include "root.h"
 #include "agent.h"
 #include "move.h"
 #include "object.h"
@@ -7,7 +6,7 @@
 
 // Owns Board* board. Owns depth (evidently).
 
-Agent* agent_create(char* board_string, int depth) {
+Agent* agent_create(const char* board_string, int depth) {
     Agent* agent = ALLOCATE_OBJECT(Agent);
     agent->board = ALLOCATE_OBJECT(Board);
     agent_parse_board_string(board_string, agent->board);
@@ -16,7 +15,7 @@ Agent* agent_create(char* board_string, int depth) {
 }
 
 void agent_destroy(Agent** agent_p) {
-    if (agent_p == NULL | *agent_p == NULL) return;
+    if ((agent_p == NULL) | (*agent_p == NULL)) return;
     Agent* agent = *agent_p;
     free(agent->board);
     agent->board = NULL;
@@ -28,7 +27,7 @@ void agent_destroy(Agent** agent_p) {
 Move* agent_get_best_move(Agent* agent) {
     Search* search = ALLOCATE_OBJECT(Search);
     search_init(search);
-    search_set_board(search, board, board->player); // FIXME: Compute the player's turn to play
+    search_set_board(search, agent->board, agent->board->player); // FIXME: Compute the player's turn to play
     search->options.depth = agent->depth; // TODO find how to use the board in search_run
     int search_success = search_run(search);
     int move_index = search->result->move;

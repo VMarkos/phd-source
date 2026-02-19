@@ -1,11 +1,18 @@
+#include <stdio.h>
 #include "agent.h"
 #include "move.h"
 
 int main(void) {
-    const char* board_str = "(;GM[10]FF[4]SZ[8]GN[Example Game]PB[Black]PW[White];B[f5];W[d6];B[c4];W[e3];B[f4];W[c5];B[c6];W[d3])";
+    const char* board_str = "(;FF[4]GM[1]SZ[8]PB[Black]PW[White]DT[2026-02-06]RE[B+4] ;B[d3];W[c4];B[e6];W[f5];B[c3];W[c5];B[f4];W[d6];B[b4];W[c6] ;B[e3];W[f6];B[g5];W[b3];B[a3];W[d2];B[e2];W[b5];B[a4];W[c2] ;B[b6];W[b2];B[a5];W[d1];B[c1];W[a6];B[a2];W[e1];B[f2];W[g2] ;B[g3];W[h4];B[h5];W[f3];B[d7];W[g4];B[g6];W[h3];B[c7];W[b7] ;B[h6];W[a1];B[b1];W[d8];B[f7];W[e8];B[g7];W[f8];B[a7];W[h2] ;B[g1];W[e7];B[f1];W[h1];B[g8];W[h7];B[e0];W[h8];B[d0];W[c0] ;B[b0];W[a0])";
     int depth = 13;
+    printf("Depth: %d\n", depth);
     Agent* agent = agent_create(board_str, depth);
+    printf("Agent created!\n");
     Move* move = agent_get_best_move(agent);
+    printf("Move computed\n");
+    char* move_string;
+    printf("Move: %s\n", move_to_string(move->x, agent->board->player, move_string));
     agent_destroy(&agent);
+    printf("Agent destroyed\n");
     return 0;
 }
