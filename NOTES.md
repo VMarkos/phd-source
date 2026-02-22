@@ -24,5 +24,6 @@ Important things about edax v 4.6
 
 ## TODOs
 
-- [ ] Spot and modify the definition of `play_go()` to build a utility that reads an SGF string and gets a suggestion by Edax for that position at a specific depth.
-- [ ] Find where depth is modified as a search parameter.
+- [x] Spot and modify the definition of `play_go()` to build a utility that reads an SGF string and gets a suggestion by Edax for that position at a specific depth.
+- [x] Find where depth is modified as a search parameter.
+- [ ] Edit `agent.c` such that the Agent class is actually a subset of `Play`, properly joining search into its own thread and making any adjustments needed? (maybe this is why the current implemenation keeps failing).

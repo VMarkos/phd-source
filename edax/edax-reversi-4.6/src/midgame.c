@@ -32,14 +32,20 @@ int search_eval_0(Search *search)
 
 	SEARCH_STATS(++statistics.n_search_eval_0);
 	SEARCH_UPDATE_EVAL_NODES(search->n_nodes);
+    
+    printf("Eval accumulate (before).\n");
 
 	score = eval_accumulate(&search->eval);
+
+    printf("Eval accumulate (after).\n");
 
 	if (score > 0) score += 64; else score -= 64;
 	score /= 128;
 
 	if (score <= SCORE_MIN) score = SCORE_MIN + 1;
 	else if (score >= SCORE_MAX) score = SCORE_MAX - 1;
+    
+    printf("Computed score: %d\n", score);
 
 	return score;
 }

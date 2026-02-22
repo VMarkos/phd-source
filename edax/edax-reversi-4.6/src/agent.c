@@ -10,7 +10,7 @@ Agent* agent_create(const char* board_string, int depth) {
     Agent* agent = ALLOCATE_OBJECT(Agent);
     agent->board = ALLOCATE_OBJECT(Board);
     agent_parse_board_string(board_string, agent->board);
-    printf("%#016x - %#016x\n", agent->board->player, agent->board->opponent);
+    printf("%#016lx - %#016lx\n", agent->board->player, agent->board->opponent);
     agent->depth = depth;
     return agent;
 }
@@ -29,10 +29,10 @@ Move* agent_get_best_move(Agent* agent) {
     Search* search = ALLOCATE_OBJECT(Search);
     search_init(search);
     printf("Init search!\n");
-    search_set_board(search, agent->board, agent->board->player); // FIXME: Compute the player's turn to play
+    search_set_board(search, agent->board, agent->board->player);
     printf("Set board!\n");
-    search->options.depth = agent->depth; // TODO find how to use the board in search_run
-    int search_success = search_run(search);
+    search->options.depth = agent->depth;
+    search_run(search);
     printf("Search run!\n");
     int move_index = search->result->move;
     Move* move;
@@ -44,4 +44,5 @@ Move* agent_get_best_move(Agent* agent) {
 // Thin wrapper around `board_set()`.
 void agent_parse_board_string(const char* board_string, Board* board) {
     board_set(board, board_string);
+    // board_from_FEN(board, board_string);
 }

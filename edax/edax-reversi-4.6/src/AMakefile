@@ -24,11 +24,11 @@ ifeq ($(OS),win)
 endif
 
 ifeq ($(CC),)
-	CC=clang
+	CC=gcc
 endif
 
 ifeq ($(CC),cc)
-	CC=clang
+	CC=gcc
 endif
 
 ifeq ($(ARCH),)

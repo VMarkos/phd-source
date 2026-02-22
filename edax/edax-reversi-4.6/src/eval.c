@@ -1095,11 +1095,16 @@ int eval_accumulate(const Eval *eval) {
 	sum = _mm_cvtsi128_si32(s2) + _mm_extract_epi32(s2, 1);
 
 #else
-
+    printf("second case.\n");
+    printf("eval: %u\n", eval);
+    // printf("eval player: %d\n", eval->player);
 	const uint32_t *o = WEIGHT_OFFSET;
 	const int16_t *w0 = EVAL_WEIGHT[eval->ply][eval->player];
+    printf("w0: %d.\n", *w0);
 	const int16_t *w1 = w0 + o[1], *w2 = w0 + o[2], *w3 = w0 + o[3], *w4 = w0 + o[4];
+    printf("Accessing eval->feature.\n");
 	const uint16_t *f = eval->feature[eval->ply].v1;
+    printf("eval feature accessed.\n");
 	int sum;
 
 	sum = w0[f[ 0]] + w0[f[ 1]] + w0[f[ 2]] + w0[f[ 3]]
@@ -1115,9 +1120,9 @@ int eval_accumulate(const Eval *eval) {
 	    + w4[f[38]] + w4[f[39]] + w4[f[40]] + w4[f[41]]
 	    + w4[f[42]] + w4[f[43]] + w4[f[44]] + w4[f[45]]
 	    + w4[f[46]];
-
+    printf("Sum computed (in if).\n");
 #endif
-
+    printf("Sum computed\n");
 	return sum;
 }
 
