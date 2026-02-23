@@ -1,11 +1,13 @@
 #ifndef AGENT_H
 #define AGENT_H
 
-#include "board.h"
+// #include "board.h"
 #include "move.h"
+#include "play.h"
 
 typedef struct Agent {
-    Board* board;
+    // Board* board;
+    Play* play;
     int depth;
 } Agent;
 
@@ -18,7 +20,10 @@ void agent_destroy(Agent**);
 // Get best move as per Edax
 Move* agent_get_best_move(Agent*);
 
+// Load game from file
+void agent_load_game(Agent*, const char*);
+
 // Parse SGF string to Edax Board
-void agent_parse_board_string(const char*, Board*);
+// void agent_parse_board_string(const char*, Board*);
 
 #endif
