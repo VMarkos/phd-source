@@ -109,10 +109,14 @@ bool play_load(Play *play, const char *file)
 		fclose(f);
 		return false;
 	}
-
+    
+    printf("game loaded from text\n");
 	play->initial_board = game.initial_board;
+    printf("initial board accessed\n");
 	play->initial_player = game.player;
+    printf("initial player accessed\n")
 	play_new(play);
+    printf("play loaded from text\n");
 	for (i = 0; i < 60 && game.move[i] != NOMOVE; ++i) {
 		if (play_must_pass(play)) play_move(play, PASS);
 		if (!play_move(play, game.move[i])) {

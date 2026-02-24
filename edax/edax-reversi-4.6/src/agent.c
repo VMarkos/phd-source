@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "agent.h"
-#include "move.h"
+// #include "move.h"
 #include "object.h"
 #include "play.h"
 #include "search.h"
@@ -10,7 +10,8 @@
 Agent* agent_create(const char* file, int depth) {
     Agent* agent = ALLOCATE_OBJECT(Agent);
     agent->play = ALLOCATE_OBJECT(Play);
-    agent_load_game(agent, file);
+    bool game_loaded = agent_load_game(agent, file);
+    if (!game_loaded) printf("Failed to load game!\n");
     agent->depth = depth;
     return agent;
 }
@@ -35,14 +36,14 @@ void agent_destroy(Agent** agent_p) {
     *agent_p = NULL;
 }
 
-void agent_load_game(Agent* agent, const char* file) {
-    play_load(agent->play, file);
+bool agent_load_game(Agent* agent, const char* file) {
+    return play_load(agent->play, file);
 }
 
-Move* agent_get_best_move(Agent* agent) {
-    play_go(agent->play, false);
-    Move* move = agent->play->result.move;
-    return move;
+int32_t agent_get_best_move(Agent* agent) {
+    play_go(agent->play, true);
+    int32_t move_x = play_get_last_move(agent->play)->x;
+    return move_x;
     /* Search* search = ALLOCATE_OBJECT(Search);
     search_init(search);
     printf("Init search!\n");

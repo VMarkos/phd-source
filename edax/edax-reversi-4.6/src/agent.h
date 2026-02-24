@@ -18,10 +18,10 @@ Agent* agent_create(const char*, int);
 void agent_destroy(Agent**);
 
 // Get best move as per Edax
-Move* agent_get_best_move(Agent*);
+int32_t agent_get_best_move(Agent*);
 
 // Load game from file
-void agent_load_game(Agent*, const char*);
+bool agent_load_game(Agent*, const char*);
 
 // Parse SGF string to Edax Board
 // void agent_parse_board_string(const char*, Board*);
