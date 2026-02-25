@@ -285,6 +285,8 @@ void text_to_game(const char *line, Game *game)
 		board_update(&board, &move);
 		line = s;
 	}
+    board_print(&board, BLACK, stdout);
+    
 }
 
 /**

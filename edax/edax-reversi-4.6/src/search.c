@@ -560,9 +560,14 @@ void search_clone(Search *search, Search *master)
  */
 void search_cleanup(Search *search)
 {
+    printf("searching cleanup\n");
+    printf("\tsearch: %u\n\thash table: %u\n", &search, &search->hash_table);
 	hash_cleanup(&search->hash_table);
+    printf("cleanup search hash table\n");
 	hash_cleanup(&search->pv_table);
+    printf("cleanup search pv table\n");
 	hash_cleanup(&search->shallow_table);
+    printf("cleanup search shallow table\n");
 }
 
 

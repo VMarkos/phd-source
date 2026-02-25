@@ -68,11 +68,15 @@ void play_new(Play *play)
 	play->time[0].spent = play->time[1].spent = 0;
 	play->board = play->initial_board;
 	play->player = play->initial_player;
+    printf("play set clock board player\n");
 	play->ponder.board.player = play->ponder.board.opponent = 0;
+    printf("play set pondering\n");
 	search_cleanup(&play->search);
+    printf("search cleanup\n");
 	play->i_game = play->n_game = 0;
 	play->state = IS_WAITING;
 	play->result.move = NOMOVE; // missing more initialisation ?
+    printf("play result move\n");
 	play->time[0].left = options.time;
 	play->time[1].left = options.time;
 	play->force.i_move = 0;
@@ -111,10 +115,11 @@ bool play_load(Play *play, const char *file)
 	}
     
     printf("game loaded from text\n");
+    printf("\tgame address: %u\n", &game);
 	play->initial_board = game.initial_board;
     printf("initial board accessed\n");
 	play->initial_player = game.player;
-    printf("initial player accessed\n")
+    printf("initial player accessed\n");
 	play_new(play);
     printf("play loaded from text\n");
 	for (i = 0; i < 60 && game.move[i] != NOMOVE; ++i) {

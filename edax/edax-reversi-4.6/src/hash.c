@@ -87,11 +87,13 @@ void hash_cleanup(HashTable *hash_table)
 	size_t i = 0, hash_size = hash_table->hash_mask + HASH_N_WAY + 1;
 
 	info("< cleaning hashtable >\n");
+    printf("Cleaning hash table\n");
 
 #if defined (__SSE2__) && !(HASH_COLLISIONS(1)+0)
 
 	#if defined(__AVX__)
 
+        printf("__AVX__\n");
 		assert(sizeof(Hash) == 24 && ((uint64_t)hash_table->hash & 0x1f) == 0);
 
 		alignas(32) Hash hash_init[4] = {HASH_INIT, HASH_INIT, HASH_INIT, HASH_INIT};
@@ -109,6 +111,7 @@ void hash_cleanup(HashTable *hash_table)
 
 	#else // __SSE2__
 
+        printf("__SSE2__\n");
 		Hash hash_init[2] = {HASH_INIT, HASH_INIT};
 
 		__m128i h0, h1, h2, *h = (__m128i*) hash_init;
@@ -128,6 +131,7 @@ void hash_cleanup(HashTable *hash_table)
 
 #endif
 
+    printf("Determine SSE2 or AVX\n");
 	for (; i < hash_size; ++i) {
 		hash_table->hash[i] = HASH_INIT;
 	}
