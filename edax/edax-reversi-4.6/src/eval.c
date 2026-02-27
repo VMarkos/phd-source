@@ -1099,6 +1099,11 @@ int eval_accumulate(const Eval *eval) {
     printf("eval: %u\n", eval);
     // printf("eval player: %d\n", eval->player);
 	const uint32_t *o = WEIGHT_OFFSET;
+    printf("Weight offset: %d\n", *o);
+    printf("\tply: %d | player: %d\n", eval->ply, eval->player);
+    printf("\tEVAL_WEIGHT @ %x\n", *EVAL_WEIGHT);
+    printf("\tEVAL_WEIGHT[0] @ %x\n", *EVAL_WEIGHT[eval->ply]);
+    printf("\tEVAL_WEIGHT[0][0] @ %x\n", *EVAL_WEIGHT[eval->ply][eval->player]);
 	const int16_t *w0 = EVAL_WEIGHT[eval->ply][eval->player];
     printf("w0: %d.\n", *w0);
 	const int16_t *w1 = w0 + o[1], *w2 = w0 + o[2], *w3 = w0 + o[3], *w4 = w0 + o[4];

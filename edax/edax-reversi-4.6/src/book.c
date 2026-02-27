@@ -2190,6 +2190,7 @@ void book_get_line(Book *book, const Board *board, const Move *move, Line *line)
 #else
 bool book_get_random_move(Book *book, const Board *board, Move *move, const int randomness)
 {
+    printf("Book @ %x\n", book);
 	Position *position = book_probe(book, board);
 	if (position) {
 		position_get_random_move(position, board, move, &book->random, randomness);

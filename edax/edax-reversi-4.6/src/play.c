@@ -236,6 +236,8 @@ void play_go(Play *play, const bool update)
 	if (play_is_game_over(play)) return;
 
     printf("not game over!\n");
+    printf("options @ %x\n", &options);
+    printf("\tbook allowed: %d\n", options.book_allowed);
 	if (play_force_go(play, &move)) {
         printf("play force go\n");
 		play_stop_pondering(play);
@@ -1174,6 +1176,8 @@ bool play_force_go(Play *play, Move *move)
 	int s, x;
 
     printf("play: %x\n", play);
+    printf("play->force: %x\n", play->force);
+    printf("\ti_move: %x | n_move: %x\n", play->force.i_move, play->force.n_move);
 	if (play->force.i_move < play->force.n_move) {
         printf("imove < nmove\n");
 		if (board_equal(&play->board, play->force.real + play->force.i_move)) {
@@ -1193,7 +1197,8 @@ bool play_force_go(Play *play, Move *move)
 			}
 		}
 	}
-
+    
+    printf("False!\n");
 	return false;
 }
 

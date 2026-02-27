@@ -1,44 +1,44 @@
 #include <stdlib.h>
 #include "agent.h"
-// #include "move.h"
+#include "book.h"
 #include "ui.h"
 #include "object.h"
+#include "options.h"
 #include "play.h"
 #include "search.h"
 
 // Owns Board* board. Owns depth (evidently).
 
+extern bool book_verbose;
+
 Agent* agent_create(const char* file, int depth) {
     Agent* agent = ALLOCATE_OBJECT(Agent);
     agent->play = ALLOCATE_OBJECT(Play);
+    agent->book = ALLOCATE_OBJECT(Book);
     bool game_loaded = agent_load_game(agent, file);
     if (!game_loaded) printf("Failed to load game!\n");
     agent->depth = depth;
     return agent;
 }
 
-    /*
-Agent* agent_create(const char* board_string, int depth) {
-    Agent* agent = ALLOCATE_OBJECT(Agent);
-    agent->board = ALLOCATE_OBJECT(Board);
-    agent_parse_board_string(board_string, agent->board);
-    printf("%#016lx - %#016lx\n", agent->board->player, agent->board->opponent);
-    agent->depth = depth;
-    return agent;
-}*/
 
 void agent_destroy(Agent** agent_p) {
     if ((agent_p == NULL) | (*agent_p == NULL)) return;
     Agent* agent = *agent_p;
     free(agent->play);
     agent->play = NULL;
+    free(agent->book);
+    agent->book = NULL;
     agent->depth = 0;
     free(agent);
     *agent_p = NULL;
 }
 
 bool agent_load_game(Agent* agent, const char* file) {
-    play_init(agent->play, NULL); // Maybe load a book somehow here, even an empty one?
+    book_verbose = true;
+    play_init(agent->play, agent->book); // Maybe load a book somehow here, even an empty one?
+    agent->book->search = &agent->play->search;
+    book_load(agent->book, options.book_file);
     agent->play->search.id = 1; // hard coded as in UI
     search_set_observer(&agent->play->search, search_observer);
     agent->play->type = UI_NBOARD;

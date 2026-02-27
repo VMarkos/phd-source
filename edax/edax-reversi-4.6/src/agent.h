@@ -2,12 +2,13 @@
 #define AGENT_H
 
 // #include "board.h"
+#include "book.h"
 #include "move.h"
 #include "play.h"
 
 typedef struct Agent {
-    // Board* board;
     Play* play;
+    Book* book;
     int depth;
 } Agent;
 
