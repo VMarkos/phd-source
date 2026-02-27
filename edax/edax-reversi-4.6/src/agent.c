@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "agent.h"
 // #include "move.h"
+#include "ui.h"
 #include "object.h"
 #include "play.h"
 #include "search.h"
@@ -37,6 +38,10 @@ void agent_destroy(Agent** agent_p) {
 }
 
 bool agent_load_game(Agent* agent, const char* file) {
+    play_init(agent->play, NULL); // Maybe load a book somehow here, even an empty one?
+    agent->play->search.id = 1; // hard coded as in UI
+    search_set_observer(&agent->play->search, search_observer);
+    agent->play->type = UI_NBOARD;
     return play_load(agent->play, file);
 }
 

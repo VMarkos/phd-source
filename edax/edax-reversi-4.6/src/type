@@ -1,0 +1,379 @@
+agent_main.c:    board_print(&agent->play->board, agent->play->player, stdout);
+edax.c:	ui->book.search = &play->search;
+edax.c:	play->search.id = 1;
+edax.c:	search_set_observer(&play->search, edax_observer);
+edax.c:	play->type = ui->type;
+edax.c:		if (!ui_event_exist(ui) && !play_is_game_over(play) && (ui->mode == !play->player || ui->mode == 2)) {
+edax.c:				board_init(&play->initial_board);
+edax.c:				play->initial_player = BLACK;
+edax.c:				play_analyze(play, string_to_int(param, play->n_game));
+edax.c:					if (sym & 8) play->player ^= 1;
+edax.c:				obf_test(&play->search, problem_file, hard_file);
+edax.c:				search_set_observer(&play->search, edax_observer);
+edax.c:				script_to_obf(&play->search, script_file, obf_file);
+edax.c:				search_set_observer(&play->search, edax_observer);
+edax.c:					quick_count_games(&play->board, depth, size);
+edax.c:					count_positions(&play->board, depth, size);
+edax.c:					count_shapes(&play->board, depth, size);
+edax.c:				count_games(&play->board, depth);
+edax.c:				estimate_games(&play->board, n);
+edax.c:				seek_highest_mobility(&play->board, t);
+edax.c:				line_init(&solution, play->player);
+edax.c:				if (seek_position(&target, &play->board, &solution)) {
+edax.c:				obf_speed(&play->search, n);
+edax.c:				wthor_test(param, &play->search);
+edax.c:				wthor_eval(param, &play->search, histogram);
+edax.c:				if (parse_move(param, &play->board, &move) != param) {
+edax.c:					search_set_board(&play->search, &play->board, play->player);
+edax.c:					pv_debug(&play->search, &move, stdout);
+edax.c:				Book *book = play->book;
+edax.c:				book->search = &play->search;
+edax.c:					src.search = &play->search;
+edax.c:					book_subtree(book, &play->board); // remove unreachable lines.
+edax.c:					book_show(book, &play->board);
+edax.c:					val_1 = string_to_int(book_param, play->n_game); BOUND(val_1, 1, play->n_game, "depth");
+edax.c:					book_deviate(book, &play->board, val_1, val_2);
+edax.c:					book_enhance(book, &play->board, val_1, val_2);
+edax.c:					book_feed_hash(book, &play->board, &play->search);
+edax.c:					base_analyze(&base, &play->search, n_empties, true);
+edax.c:					base_analyze(&base, &play->search, n_empties, false);
+edax.c:					base_complete(&base, &play->search);
+edax.c:				if (search_count_tasks(&play->search) != options.n_task) {
+edax.c:					search_set_task_number(&play->search, options.n_task);
+edax.c:				tune_move_evaluate(&play->search, problem, parse_skip_spaces(w_name));
+edax.c:				search_set_observer(&play->search, edax_observer);
+edax.c:	HASH_STATS(printf("pv_table     : %12llu stores %12llu probes %12llu found probes\n", play->search.pv_table.n_store, play->search.pv_table.n_try, play->search.pv_table.n_found);)
+edax.c:	HASH_STATS(printf("hash_table   : %12llu stores %12llu probes %12llu found probes\n", play->search.hash_table.n_store, play->search.hash_table.n_try, play->search.hash_table.n_found);)
+edax.c:	HASH_STATS(printf("shallow_table: %12llu stores %12llu probes %12llu found probes\n", play->search.shallow_table.n_store, play->search.shallow_table.n_try, play->search.shallow_table.n_found);)
+ggs.c:	if (search_count_tasks(&ui->play->search) == options.n_task) {
+ggs.c:		if (search_count_tasks(&ui->play->search) < options.n_task) {
+ggs.c:		if (search_count_tasks(&ui->play->search) == options.n_task && options.n_task > 1) {
+ggs.c:	result = &play->result;
+ggs.c:	move_to_string(result->move, play->player, move);
+ggs.c:	} else if (play->search.n_empties >= 15) { //avoid noisy display
+ggs.c:		if (play->search.stop == STOP_TIMEOUT) {
+ggs.c:			sprintf(search_state, "%s at %d@%d%%", search_state_array[play->search.stop], play->search.depth, selectivity_table[play->search.selectivity].percent);
+ggs.c:			sprintf(search_state, "%s", search_state_array[play->search.stop]);
+ggs.c:			ui->ggs->me, move, ui->ggs->board.id, search_count_tasks(&play->search), search_count_tasks(&play->search) > 1 ? "s ;" : " ;",
+ggs.c:			error("cannot play GGS move %s ?", move_to_string(ui->ggs->board.move_list[i], play->player, s_move));
+ggs.c:	ggs_printf("[%s's turn in game %s]\n", ui->ggs->board.player[play->player].name, ui->ggs->board.id);
+ggs.c:	board_print(&play->board, play->player, stdout);
+ggs.c:	if (play->player == edax_turn) {
+ggs.c:		info("<Updating with bad move %s>\n", move_to_string(ui->ggs->board.move, play->player, s_move));
+ggs.c:	if (!board_equal(&board, &play->board)) { // may happens when game diverges
+ggs.c:		play->board = board; play->player = turn;
+ggs.c:	if (turn != play->player) { // should never happen: TODO fatal error?
+ggs.c:		play->player = turn;
+ggs.c:	ggs_printf("[%s's turn in game %s]\n", ui->ggs->board.player[play->player].name, ui->ggs->board.id);
+ggs.c:	if (play->player == edax_turn) {
+ggs.c:	ui->book.search = &ui->play->search;
+gtp.c:	ui->book.search = &play->search;
+gtp.c:	play->search.id = 1;
+gtp.c:	search_set_observer(&play->search, gtp_observer);
+gtp.c:	play->type = ui->type;
+gtp.c:			} else if (color != play->player) {
+gtp.c:			} else if (color != play->player) {
+gtp.c:			if (play->i_game <= 0) {
+gtp.c:				if (n == 0) play->time[color].left = (t + byo_yomi_time * 1000) / byo_yomi_stone;
+gtp.c:				else play->time[color].left = t / n;
+gtp.c:				play->time[color].left = t;
+gtp.c:				gtp_fail(play->error_message, id, has_id);
+gtp.c:			} else if (color != play->player) {
+gtp.c:			board_print(&play->board, play->player, stdout);
+nboard.c:	play->search.options.header = play->search.options.separator = NULL;
+nboard.c:	ui->book.search = &play->search;
+nboard.c:	play->search.id = 1;
+nboard.c:	search_set_observer(&play->search, nboard_observer);
+nboard.c:	play->type = ui->type;
+nboard.c:				game_get_board(&game, 60, &play->initial_board);
+nboard.c:				if (pass && board_is_pass(&play->initial_board)) board_pass(&play->initial_board);
+nboard.c:			nboard_send_move(&play->result);
+options.c:	EDAX_FIXED_LEVEL, // play-type
+play.c:	search_init(&play->search);
+play.c:	play->book = book;
+play.c:	board_init(&play->initial_board);
+play.c:	play->search.options.header = " depth|score|       time   |  nodes (N)  |   N/s    | principal variation";
+play.c:	play->search.options.separator = "------+-----+--------------+-------------+----------+----------------------";
+play.c:	play->player = play->initial_player = BLACK;
+play.c:	play->time[0].left = options.time;
+play.c:	play->time[0].extra = 0;
+play.c:	play->time[1].left = options.time;
+play.c:	play->time[1].extra = 0;
+play.c:	mtx_init(&play->ponder.mutex, mtx_plain);
+play.c:	play->ponder.launched = false;
+play.c:	spinlock_init(&play->result.spin);
+play.c:	play->ponder.verbose = false;
+play.c:	memset(play->error_message, 0, PLAY_MESSAGE_MAX_LENGTH);
+play.c:	search_free(&play->search);
+play.c:	play->clock = real_clock();
+play.c:	play->time[0].spent = play->time[1].spent = 0;
+play.c:	play->board = play->initial_board;
+play.c:	play->player = play->initial_player;
+play.c:	play->ponder.board.player = play->ponder.board.opponent = 0;
+play.c:	search_cleanup(&play->search);
+play.c:	play->i_game = play->n_game = 0;
+play.c:	play->state = IS_WAITING;
+play.c:	play->result.move = NOMOVE; // missing more initialisation ?
+play.c:	play->time[0].left = options.time;
+play.c:	play->time[1].left = options.time;
+play.c:	play->force.i_move = 0;
+play.c:		sprintf(play->error_message, "Cannot open file %s\n", file);
+play.c:		sprintf(play->error_message, "Unknown game format extension: %s\n", ext);
+play.c:	play->initial_board = game.initial_board;
+play.c:	play->initial_player = game.player;
+play.c:			sprintf(play->error_message, "Illegal move #%d: %s\n", i, move_to_string(game.move[i], play->player, move));
+play.c:	game.initial_board = play->initial_board;
+play.c:	game.player = play->initial_player;
+play.c:	for (i = j = 0; i < play->n_game; ++i) {
+play.c:		if (play->game[i].x != PASS) {
+play.c:			game.move[j++] = play->game[i].x;
+play.c:	board_update(&play->board, move);
+play.c:	play->game[play->i_game] = *move;
+play.c:	play->n_game = ++play->i_game;
+play.c:	play->time[play->player].spent += real_clock() - play->clock;
+play.c:	play->clock = real_clock();
+play.c:	play->player ^= 1;
+play.c:	return !can_move(play->board.player, play->board.opponent) &&
+play.c:		!can_move(play->board.opponent, play->board.player);
+play.c:	return !can_move(play->board.player, play->board.opponent) &&
+play.c:		can_move(play->board.opponent, play->board.player);
+play.c:	Search *search = &play->search;
+play.c:		play->result.depth = 0;
+play.c:		play->result.selectivity = 0;
+play.c:		play->result.move = move.x;
+play.c:		play->result.score = 0;
+play.c:		play->result.book_move = false;
+play.c:		play->result.time = real_clock() + t_real;
+play.c:		play->result.n_nodes = 0;
+play.c:		line_init(&play->result.pv, play->player);
+play.c:		line_push(&play->result.pv, move.x);
+play.c:			info("\n[Forced move %s]\n\n",  move_to_string(move.x, play->player, s_move));
+play.c:	} else if (options.book_allowed && book_get_random_move(play->book, &play->board, &move, options.book_randomness)) {
+play.c:		play->result.depth = 0;
+play.c:		play->result.selectivity = 0;
+play.c:		play->result.move = move.x;
+play.c:		play->result.score = move.score;
+play.c:		play->result.book_move = true;
+play.c:		play->result.time = real_clock() + t_real;
+play.c:		play->result.n_nodes = 0;
+play.c:		line_init(&play->result.pv, play->player);
+play.c:		book_get_line(play->book, &play->board, &move, &play->result.pv);
+play.c:			if (options.info) book_show(play->book, &play->board);
+play.c:			if (play->type == UI_XBOARD) {
+play.c:				search->observer(&play->result);
+play.c:				line_print(&play->result.pv, options.width - 54, " ", stdout);
+play.c:	} else if (play->state == IS_PONDERING && board_equal(&play->board, &play->ponder.board)) {
+play.c:		play->state = IS_THINKING;
+play.c:		else search_set_game_time(search, play->time[play->player].left);
+play.c:		search_time_reset(search, &play->board);
+play.c:		thrd_join(play->ponder.thread, NULL);
+play.c:		play->ponder.launched = false;
+play.c:		play->result = *search->result;
+play.c:		play->state = IS_WAITING;
+play.c:		if (!board_get_move(&play->board, search->result->move, &move) && move.x != PASS) {
+play.c:			fatal_error("bad move found: %s\n", move_to_string(move.x, play->player, s_move));
+play.c:			info("[stop thinking (id.%d)]\n", play->search.id);
+play.c:		play->state = IS_THINKING;
+play.c:			info("\n[start thinking (id.%d)]\n", play->search.id);
+play.c:		search_set_board(search, &play->board, play->player);
+play.c:		else search_set_game_time(search, play->time[play->player].left);
+play.c:				0.001 * play->time[play->player].left, 0.001 * search->time.mini,  0.001 * search->time.maxi,  0.001 * search->time.extra);
+play.c:		play->result = *search->result;
+play.c:		play->state = IS_WAITING;
+play.c:		if (!board_get_move(&play->board, search->result->move, &move) && move.x != PASS) {
+play.c:			fatal_error("bad move found: %s\n", move_to_string(move.x, play->player, s_move));
+play.c:			info("[stop thinking] (id.%d)]\n", play->search.id);
+play.c:	if (options.play_type != EDAX_TIME_PER_MOVE) play->time[play->player].left -= t_real;
+play.c:	Search *search = &play->search;
+play.c:	play->state = IS_THINKING;
+play.c:	search_set_board(search, &play->board, play->player);
+play.c:	if (options.book_allowed && book_get_moves(play->book, &play->board, &book_moves)) {
+play.c:			line_init(&pv, play->player);
+play.c:			book_get_line(play->book, &play->board, m, &pv);
+play.c:			if (play->type == UI_NBOARD) {
+play.c:				board_next(&play->board, m->x, &b);
+play.c:				book_get_game_stats(play->book, &b, &stat);
+play.c:				printf(" %d %" PRIu64 " %d\n", m->score, stat.n_lines, play->book->options.level);
+play.c:		else search_set_game_time(search, play->time[play->player].left);
+play.c:		if (play->type == UI_NBOARD) {
+play.c:	Search *search = &play->search;
+play.c:	mtx_lock(&play->ponder.mutex);
+play.c:	if (play->state == IS_PONDERING || play->state == IS_ANALYZING) {
+play.c:		board = play->board;
+play.c:		player = play->player;
+play.c:		search->options.keep_date = (play->state == IS_PONDERING && search->pv_table.date > 0);
+play.c:		if (play->ponder.verbose) search->options.verbosity = options.verbosity;
+play.c:		if (play->state == IS_PONDERING && move.x != NOMOVE) {
+play.c:				play->ponder.board = board;
+play.c:				if (options.info && play->state == IS_PONDERING) {
+play.c:			play->ponder.board = board;
+play.c:			if (options.info && play->state == IS_PONDERING) {
+play.c:		play->state = IS_WAITING;
+play.c:	play->ponder.launched = false;
+play.c:	mtx_unlock(&play->ponder.mutex);
+play.c:	if (options.can_ponder && play->state == IS_WAITING) {
+play.c:		play->ponder.board.player = play->ponder.board.opponent = 0;
+play.c:		play->state = IS_PONDERING;
+play.c:		thrd_create(&play->ponder.thread, play_ponder_run, play);
+play.c:		play->ponder.launched = true;
+play.c:	info("[play->state=%s]", state[play->state]);
+play.c:	while (play->state == IS_PONDERING) {
+play.c:		search_stop_all(&play->search, STOP_PONDERING);
+play.c:	if (play->ponder.launched) {
+play.c:		if (play->search.stop == RUNNING) {
+play.c:			search_stop_all(&play->search, STOP_PONDERING);
+play.c:		thrd_join(play->ponder.thread, NULL);
+play.c:		play->ponder.launched = false;
+play.c:	search_stop_all(&play->search, STOP_ON_DEMAND);
+play.c:	if (play->i_game > 0) {
+play.c:		mtx_lock(&play->ponder.mutex);
+play.c:		board_restore(&play->board, &play->game[--play->i_game]);
+play.c:		play->player ^= 1;
+play.c:		mtx_unlock(&play->ponder.mutex);
+play.c:	if (play->i_game < play->n_game) {
+play.c:		board_update(&play->board, &play->game[play->i_game++]);
+play.c:		play->player ^= 1;
+play.c:	play->initial_player = board_set(&play->initial_board, board);
+play.c:	if (play->initial_player == EMPTY) { /* bad board ? */
+play.c:		play->initial_board.opponent &= (~play->initial_board.player);
+play.c:		play->initial_player = (board_count_empties(&play->initial_board) & 1);
+play.c:		if (play->initial_player == WHITE) board_swap_players(&play->initial_board);
+play.c:	play->initial_player = board_from_FEN(&play->initial_board, board);
+play.c:	if (play->initial_player != EMPTY) {
+play.c:	while ((next = parse_move(string, &play->board, &move)) != string || move.x == PASS) {
+play.c:	board_get_move(&play->board, x, &move);
+play.c:	if (board_check_move(&play->board, &move)) {
+play.c:	if (parse_move(string, &play->board, &move) != string) {
+play.c:	return play->i_game ? play->game + play->i_game - 1 : NULL;
+play.c:	Search *search = &play->search;
+play.c:	search_set_board(search, &play->board, play->player);
+play.c:		board_next(&play->board, played->x, &board);
+play.c:			board_next(&play->board, move->x, &board);
+play.c:		int n_empties = board_count_empties(&play->board);
+play.c:		fprintf(f, " %s    %+3d  ", move_to_string(m->x, play->player, s), m->score);
+play.c:			fprintf(f, "  %+3d     %s ", a->score, move_to_string(a->x, play->player, s));
+play.c:	search_cleanup(&play->search);
+play.c:	search_set_board(&play->search, &play->board, play->player);
+play.c:	for (i = play->i_game - 1; i >= 0 && i >= play->i_game - n; --i) {
+play.c:		move = play->game + i;
+play.c:		play->player ^= 1;
+play.c:		board_restore(&play->board, move);
+play.c:		n_empties = board_count_empties(&play->board);
+play.c:			if (depth == n_empties && percent == 100) ++n_exact[play->player]; else ++n_eval[play->player];
+play.c:					++n_error[play->player];
+play.c:					disc_error[play->player] += alternative.score - score;
+play.c:					++n_rejection[play->player];
+play.c:					disc_rejection[play->player] += alternative.score - score;
+play.c:		if (play->search.stop == STOP_ON_DEMAND) break;
+play.c:	if (i < 0 || i < play->i_game - n) ++i;
+play.c:	for (; i < play->i_game; ++i) {
+play.c:		board_update(&play->board, play->game + i);
+play.c:		play->player ^= 1;
+play.c:	if (book_get_moves(play->book, &play->board, &movelist)) {
+play.c:			board_next(&play->board, played->x, &board);
+play.c:				board_next(&play->board, move->x, &board);
+play.c:	for (i = play->i_game - 1; i >= 0 && i >= play->i_game - n; --i) {
+play.c:		move = play->game + i;
+play.c:		play->player ^= 1;
+play.c:		board_restore(&play->board, move);
+play.c:		if (play->search.stop == STOP_ON_DEMAND) break;
+play.c:	if (i < 0 || i < play->i_game - n) ++i;
+play.c:	for (; i < play->i_game; ++i) {
+play.c:		board_update(&play->board, play->game + i);
+play.c:		play->player ^= 1;
+play.c:	play->book->stats.n_nodes = play->book->stats.n_links = 0;
+play.c:	board = play->initial_board;
+play.c:	for (i = 0; i < play->n_game && board_check_move(&board, play->game + i); ++i) {
+play.c:		board_update(&board, play->game + i);
+play.c:		book_add_board(play->book, &board);
+play.c:		board_restore(&board, play->game + i);
+play.c:	book_add_board(play->book, &board);
+play.c:	if (play->book->stats.n_nodes + play->book->stats.n_links) {
+play.c:		book_link(play->book);
+play.c:		book_negamax(play->book);
+play.c:		book_save(play->book, file);
+play.c:	play->time[play->player].left = left;
+play.c:	play->time[play->player].extra = extra;
+play.c:	Board *board = &play->board;
+play.c:	const int p = play->player;
+play.c:	const int ip = play->player ^ (play->i_game & 1);
+play.c:	for (i = j = 0; i < play->i_game; i++) {
+play.c:		x = play->game[i].x;
+play.c:			fputs("  ", f); time_print(play->time[BLACK].spent, true, f); fputs("       ", f);
+play.c:			else fprintf(f,"  ply %2d (%2d empties)   ", play->i_game + 1, board_count_empties(board));
+play.c:			fputs("  ", f); time_print(play->time[WHITE].spent, true, f); fputs("       ", f);
+play.c:				if (ip == BLACK) square = 2 - ((play->initial_board.opponent >> x) & 1) - 2 * ((play->initial_board.player >> x) & 1);
+play.c:				else square = 2 - ((play->initial_board.player >> x) & 1) - 2 * ((play->initial_board.opponent >> x) & 1);
+play.c:	play->force.n_move = play->force.i_move = 0;
+play.c:	board = play->initial_board;
+play.c:	play->force.real[play->force.n_move] = board;
+play.c:	board_unique(&board, play->force.unique + play->force.n_move);
+play.c:		play->force.move[play->force.n_move] = move;
+play.c:		++play->force.n_move;
+play.c:		play->force.real[play->force.n_move] = board;
+play.c:		board_unique(&board, play->force.unique + play->force.n_move);
+play.c:	if (play->force.i_move < play->force.n_move) {
+play.c:		board_unique(&play->board, &unique);
+play.c:		if ((board_equal(&unique, play->force.unique + play->force.i_move))) {
+play.c:			++play->force.i_move;
+play.c:	if (play->force.i_move > 0) {
+play.c:		board_unique(&play->board, &unique);
+play.c:		if (board_equal(&unique, play->force.unique + play->force.i_move)) {
+play.c:			--play->force.i_move;
+play.c:	if (play->force.i_move < play->force.n_move) {
+play.c:		if (board_equal(&play->board, play->force.real + play->force.i_move)) {
+play.c:			*move = play->force.move[play->force.i_move];
+play.c:		board_unique(&play->board, &unique);
+play.c:		if (board_equal(&unique, play->force.unique + play->force.i_move)) {
+play.c:				board_symetry(play->force.real + play->force.i_move, s, &sym);
+play.c:				if (board_equal(&play->board, &sym)) {
+play.c:					x = symetry(play->force.move[play->force.i_move].x, s);
+play.c:					board_get_move(&play->board, x, move);
+play.c:	board_symetry(&play->initial_board, sym, &play->initial_board);
+play.c:	board_symetry(&play->board, sym, &play->board);
+play.c:	board = play->initial_board;
+play.c:	for (i = 0; i  < play->n_game; ++i) {
+play.c:		x = symetry(play->game[i].x, sym);
+play.c:		play->game[i] = move;
+play.c:	board = play->initial_board;
+play.c:	for (i = 0; i  < play->i_game; ++i) {
+play.c:		board_update(&board, play->game + i);
+xboard.c:	Search *const search = &play->search;
+xboard.c:	play->initial_player = board_from_FEN(&play->initial_board, "8/8/8/3Pp3/3pP3/8/8/8 w - - 0 1");
+xboard.c:	play->type = ui->type;
+xboard.c:	play->ponder.verbose = true;
+xboard.c:	xboard_send("setup (P.....p.....) %s\n", board_to_FEN(&play->board, play->player, fen));
+xboard.c:	const int x = search_guess(&play->search, &play->board);
+xboard.c:	Book *const book = play->book;
+xboard.c:	if (book_get_moves(book, &play->board, &movelist)) {
+xboard.c:	const Board *board = &play->board;
+xboard.c:		n_discs[play->player] = bit_count(board->player);
+xboard.c:		n_discs[!play->player] = bit_count(board->opponent);
+xboard.c:	Search *search = &play->search;
+xboard.c:	while (play->state == IS_ANALYZING) {
+xboard.c:		search_stop_all(&play->search, STOP_PONDERING);
+xboard.c:	if (play->ponder.launched) {
+xboard.c:		thrd_join(play->ponder.thread, NULL);
+xboard.c:		play->ponder.launched = false;
+xboard.c:	if (play->state == IS_WAITING) {
+xboard.c:		play->ponder.board.player = play->ponder.board.opponent = 0;
+xboard.c:		play->state = IS_ANALYZING;
+xboard.c:		search_cleanup(&play->search);
+xboard.c:		thrd_create(&play->ponder.thread, play_ponder_run, play);
+xboard.c:		play->ponder.launched = true;
+xboard.c:	Search *search = &play->search;
+xboard.c:			if (play->initial_player == EMPTY) xboard_error("(bad FEN): %s\n", param);
+xboard.c:	int last_edax_turn = !play->player;
+xboard.c:		if (!ui_event_exist(ui) && !play_is_game_over(play) && (edax_turn == play->player)) {
+xboard.c:				play->initial_player = board_from_FEN(&play->initial_board, "8/8/8/3Pp3/3pP3/8/8/8 w - - 0 1");
+xboard.c:				edax_turn = !play->player;
+xboard.c:				edax_turn = play->player;
+xboard.c:				edax_turn = play->player;
+xboard.c:				play->time[edax_turn == EMPTY ? last_edax_turn : edax_turn].left = t * 10; // 100% of available time...
+xboard.c:				play->time[edax_turn == EMPTY ? !last_edax_turn : !edax_turn].left = t * 10; // 100% of available time...
+xboard.c:					play->book->options.verbosity = play->book->search->options.verbosity = 0;
+xboard.c:				if (play->initial_player == EMPTY) xboard_error("(bad FEN): %s\n", param);
+xboard.c:				if (edax_turn != play->player) play_ponder(play);
+xboard.c:				search_resize_hashtable(&play->search);
+xboard.c:				if (search_count_tasks(&play->search) != options.n_task) {
+xboard.c:					search_set_task_number(&play->search, options.n_task);

@@ -1,0 +1,190 @@
+cassio.c: *  - With "-ui-log-file cassio.log" edax will saved communicated data in the "cassio.log" file.
+edax.c:	Play *play = ui->play;
+edax.c:	play_init(play, &ui->book);
+edax.c:	ui->book.search = &play->search;
+edax.c:	book_load(&ui->book, options.book_file);
+edax.c:	ui->mode = options.mode;
+edax.c:	play->type = ui->type;
+edax.c:	if (ui->book.need_saving) book_save(&ui->book, options.book_file);
+edax.c:	book_free(&ui->book);
+edax.c:	play_free(ui->play);
+edax.c:	Play *play = ui->play;
+edax.c:		if (!ui_event_exist(ui) && !play_is_game_over(play) && (ui->mode == !play->player || ui->mode == 2)) {
+edax.c:			if (ui->mode != 2) play_ponder(play);
+edax.c:				if (options.auto_swap && ui->mode < 2) ui->mode = !ui->mode;
+edax.c:			} else if (!options.auto_quit && (strcmp(cmd, "eof") == 0 && (ui->mode != 2 || play_is_game_over(play)))){
+edax.c:				if (ui->mode == 0 || ui->mode == 1) play_undo(play);
+edax.c:				if (ui->mode == 0 || ui->mode == 1) play_redo(play);
+edax.c:				ui->mode = string_to_int(param, 3);
+edax.c:				ui->mode = 3;
+edax.c:				ui->free(ui);
+edax.c:				ui->init(ui);
+edax.c:				ui->loop(ui);
+edax.c:				ui->free(ui);
+edax.c:				ui->init(ui);
+edax.c:				ui->loop(ui);
+edax.c:				ui->free(ui);
+edax.c:				ui->free(ui);
+edax.c:				ui->init(ui);
+edax.c:				ui->loop(ui);
+ggs.c:	GGSClient *client = ui->ggs;
+ggs.c:	if (search_count_tasks(&ui->play->search) == options.n_task) {
+ggs.c:		play = ui->play;
+ggs.c:		play = ui->play + turn;
+ggs.c:	int remaining_time = ui->ggs->board.clock[turn].ini_time;
+ggs.c:	int extra_time = ui->ggs->board.clock[turn].ext_time;
+ggs.c:	if (ui->is_same_play) {
+ggs.c:		play = ui->play;
+ggs.c:		if (search_count_tasks(&ui->play->search) < options.n_task) {
+ggs.c:			play_stop_pondering(ui->play);
+ggs.c:			search_set_task_number(&ui->play[0].search, options.n_task);
+ggs.c:			play_stop_pondering(ui->play + 1);
+ggs.c:			// search_set_task_number(&ui->play[1].search, 0); // 0 is not an allowed value
+ggs.c:		play = ui->play + turn;
+ggs.c:		if (search_count_tasks(&ui->play->search) == options.n_task && options.n_task > 1) {
+ggs.c:			play_stop_pondering(ui->play);
+ggs.c:			search_set_task_number(&ui->play[0].search, options.n_task / 2);
+ggs.c:			play_stop_pondering(ui->play + 1);
+ggs.c:			search_set_task_number(&ui->play[1].search, options.n_task / 2);
+ggs.c:			search_share(&ui->play[0].search, &ui->play[1].search);
+ggs.c:		ggs_client_send(ui->ggs, "tell .%s *** GAME OVER ***\n", ui->ggs->me);
+ggs.c:	ggs_client_send(ui->ggs, "tell /os play %s %s/%d/%.2f\n", ui->ggs->board.id, move, result->score, 0.001 * (real_time + 1));
+ggs.c:		ggs_printf("[%s plays %s in game %s ; score = %d from book]\n", ui->ggs->me, move, ui->ggs->board.id, result->score);
+ggs.c:		ggs_client_send(ui->ggs, "tell .%s -----------------------------------------"
+ggs.c:			ui->ggs->me,
+ggs.c:			ui->ggs->me, move, ui->ggs->board.id,
+ggs.c:			ui->ggs->me, move, ui->ggs->board.id,
+ggs.c:		ggs_client_send(ui->ggs, "tell .%s -----------------------------------------"
+ggs.c:			ui->ggs->me,
+ggs.c:			ui->ggs->me, move, ui->ggs->board.id, search_count_tasks(&play->search), search_count_tasks(&play->search) > 1 ? "s ;" : " ;",
+ggs.c:	if (strcmp(ui->ggs->board.player[0].name, ui->ggs->me) == 0) {
+ggs.c:		play = ui->play;
+ggs.c:	} else if (strcmp(ui->ggs->board.player[1].name, ui->ggs->me) == 0) {
+ggs.c:		play = ui->play + 1;
+ggs.c:	ui->is_same_play = (ui->ggs->board.move_list_n == 0 || board_equal(&ui->play[0].board, &ui->play[1].board) || !ui->ggs->board.match_type.is_synchro);
+ggs.c:	if (ui->is_same_play) {
+ggs.c:		play = ui->play;
+ggs.c:	sprintf(buffer, "%s %c", ui->ggs->board.board_init, ui->ggs->board.turn_init);
+ggs.c:	for (i = 0; i < ui->ggs->board.move_list_n; i++) {
+ggs.c:		if (!play_move(play, ui->ggs->board.move_list[i])) {
+ggs.c:			error("cannot play GGS move %s ?", move_to_string(ui->ggs->board.move_list[i], play->player, s_move));
+ggs.c:	ggs_printf("[%s's turn in game %s]\n", ui->ggs->board.player[play->player].name, ui->ggs->board.id);
+ggs.c:		ggs_client_send(ui->ggs, "tell .%s =====================================\n", ui->ggs->me);
+ggs.c:	if (strcmp(ui->ggs->board.player[0].name, ui->ggs->me) == 0) {
+ggs.c:		play = ui->play;
+ggs.c:	} else if (strcmp(ui->ggs->board.player[1].name, ui->ggs->me) == 0) {
+ggs.c:		play = ui->play + 1;
+ggs.c:	if (!ui->ggs->board.match_type.is_synchro) play = ui->play;
+ggs.c:	sprintf(buffer, "%s %c", ui->ggs->board.board, ui->ggs->board.turn);
+ggs.c:	if (!play_move(play, ui->ggs->board.move)) {
+ggs.c:		info("<Updating with bad move %s>\n", move_to_string(ui->ggs->board.move, play->player, s_move));
+ggs.c:	ggs_printf("[%s's turn in game %s]\n", ui->ggs->board.player[play->player].name, ui->ggs->board.id);
+ggs.c:	ui->is_same_play = (!ui->ggs->board.match_type.is_synchro || board_equal(&ui->play[0].board, &ui->play[1].board));
+ggs.c:	if (ui->is_same_play) ggs_printf("<Playing same game...>\n");
+ggs.c:	ui->ggs = (GGSClient*) malloc (sizeof (GGSClient));
+ggs.c:	if (ui->ggs == NULL) fatal_error("ui_init_ggs: cannot allocate the GGS client\n");
+ggs.c:	play_init(ui->play, &ui->book);
+ggs.c:	ui->book.search = &ui->play->search;
+ggs.c:	book_load(&ui->book, options.book_file);
+ggs.c:	ui->play[0].search.id = 1;
+ggs.c:	play_init(ui->play + 1, &ui->book);
+ggs.c:	ui->play[1].search.id = 2;
+ggs.c:	GGSClient *const client = ui->ggs;
+ggs.c:	ui->mode = 3;
+ggs.c:				if (ui->play[0].state == IS_THINKING) play_stop(ui->play);
+ggs.c:				else if (ui->play[1].state == IS_THINKING) play_stop(ui->play + 1);
+ggs.c:						play_store(ui->play);
+ggs.c:						play_store(ui->play + 1);
+ggs.c:						play_store(ui->play);
+ggs.c:					if (ui->book.need_saving) {
+ggs.c:						book_save(&ui->book, options.book_file);
+ggs.c:						ui->book.need_saving = false;
+ggs.c:					play_save(ui->play, options.game_file);
+ggs.c:						play_save(ui->play + 1, options.game_file);
+ggs.c:	play_free(ui->play);
+ggs.c:	play_free(ui->play + 1);
+ggs.c:	if (ui->book.need_saving) book_save(&ui->book, options.book_file);
+ggs.c:	book_free(&ui->book);
+ggs.c:	ggs_client_free(ui->ggs);
+ggs.c:	free(ui->ggs->loop.cmd);
+ggs.c:	free(ui->ggs->once.cmd);
+ggs.c:	free(ui->ggs);
+gtp.c:	Play *play = ui->play;
+gtp.c:	play_init(play, &ui->book);
+gtp.c:	ui->book.search = &play->search;
+gtp.c:	book_load(&ui->book, options.book_file);
+gtp.c:	ui->mode = 3;
+gtp.c:	play->type = ui->type;
+gtp.c:	if (ui->book.need_saving) book_save(&ui->book, options.book_file);
+gtp.c:	book_free(&ui->book);
+gtp.c:	play_free(ui->play);
+gtp.c:	Play *play = ui->play;
+main.c:	ui->type = UI_EDAX;
+main.c:	ui->init = ui_init_edax;
+main.c:	ui->free = ui_free_edax;
+main.c:	ui->loop = ui_loop_edax;
+main.c:	} else if (ui->type == UI_CASSIO) {
+main.c:		ui->init(ui);
+main.c:		ui->loop(ui);
+main.c:		if (ui->free) ui->free(ui);
+nboard.c:	Play *play = ui->play;
+nboard.c:	play_init(play, &ui->book);
+nboard.c:	ui->book.search = &play->search;
+nboard.c:	book_load(&ui->book, options.book_file);
+nboard.c:	ui->mode = 3;
+nboard.c:	play->type = ui->type;
+nboard.c:	if (ui->book.need_saving) book_save(&ui->book, options.book_file);
+nboard.c:	book_free(&ui->book);
+nboard.c:	play_free(ui->play);
+nboard.c:	Play *play = ui->play;
+options.c:		"  -ui-log-file <file>           file to store input/output to the (U)ser (I)nterface.\n");
+options.c:		else if (strcmp(option, "ui-log-file") == 0) options.ui_log_file = string_duplicate(value);
+ui.c:		ui->type = UI_EDAX;
+ui.c:		ui->init = ui_init_edax;
+ui.c:		ui->free = ui_free_edax;
+ui.c:		ui->loop = ui_loop_edax;
+ui.c:		ui->type = UI_GTP;
+ui.c:		ui->init = ui_init_gtp;
+ui.c:		ui->free = ui_free_gtp;
+ui.c:		ui->loop = ui_loop_gtp;
+ui.c:		ui->type = UI_NBOARD;
+ui.c:		ui->init = ui_init_nboard;
+ui.c:		ui->free = ui_free_nboard;
+ui.c:		ui->loop = ui_loop_nboard;
+ui.c:		ui->type = UI_XBOARD;
+ui.c:		ui->init = ui_init_xboard;
+ui.c:		ui->free = ui_free_xboard;
+ui.c:		ui->loop = ui_loop_xboard;
+ui.c:		ui->type = UI_GGS;
+ui.c:		ui->init = ui_init_ggs;
+ui.c:		ui->free = ui_free_ggs;
+ui.c:		ui->loop = ui_loop_ggs;
+ui.c:		ui->type = UI_CASSIO;
+ui.c:	Event *const event = &ui->event;
+ui.c:	Play *const play = ui->play;
+ui.c:		if (ui->type == UI_GTP) gtp_preprocess(buffer);
+ui.c:			if (ui->type == UI_GGS) play_stop(play + 1);
+ui.c:		} else if (ui->type == UI_NBOARD && strcmp(cmd, "ping") == 0) {
+ui.c:		} else if (ui->type == UI_XBOARD && strcmp(cmd, "?") == 0) {
+ui.c:				if (ui->type == UI_GGS) play_stop(play + 1);
+ui.c:	while (ui->event.loop && !feof(stdin) && !ferror(stdin)) {
+ui.c:	event_wait(&ui->event, cmd, param);
+ui.c:	if ((message = event_peek_message(&ui->event)) != NULL) {
+ui.c:	mtx_lock(&ui->event.mutex);
+ui.c:	ok = event_exist(&ui->event);
+ui.c:	mtx_unlock(&ui->event.mutex);
+ui.c:	event_init(&ui->event);
+ui.c:	thrd_create(&ui->event.thread, ui_read_input_loop, ui);
+ui.c:	thrd_detach(ui->event.thread);
+ui.c:	event_free(&ui->event);
+xboard.c:	Play *const play = ui->play;
+xboard.c:	play_init(play, &ui->book);
+xboard.c:	ui->book.search = search;
+xboard.c:	book_load(&ui->book, options.book_file);
+xboard.c:	play->type = ui->type;
+xboard.c:	if (ui->book.need_saving) book_save(&ui->book, options.book_file);
+xboard.c:	book_free(&ui->book);
+xboard.c:	play_free(ui->play);
+xboard.c:	Play *play = ui->play;
+xboard.c:	Play *play = ui->play;
+xboard.c:	Play *play = ui->play;
