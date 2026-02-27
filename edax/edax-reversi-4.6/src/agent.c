@@ -46,22 +46,12 @@ bool agent_load_game(Agent* agent, const char* file) {
 }
 
 int32_t agent_get_best_move(Agent* agent) {
+    printf("play go not run yet\n");
     play_go(agent->play, true);
+    printf("play_go run!\n");
     int32_t move_x = play_get_last_move(agent->play)->x;
+    printf("last move retrieved!\n");
     return move_x;
-    /* Search* search = ALLOCATE_OBJECT(Search);
-    search_init(search);
-    printf("Init search!\n");
-    search_set_board(search, agent->board, agent->board->player);
-    printf("Set board!\n");
-    search->options.depth = agent->depth;
-    search_run(search);
-    printf("Search run!\n");
-    int move_index = search->result->move;
-    Move* move;
-    board_get_move(agent->board, move_index, move);
-    printf("Get best move!\n");
-    return move; */
 }
 
 // Thin wrapper around `board_set()`.
