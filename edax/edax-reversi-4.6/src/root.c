@@ -856,13 +856,10 @@ int search_run(void *v)
 	search->depth_pv_extension = get_pv_extension(0, search->n_empties);
 	search->stability_bound.upper = SCORE_MAX - 2 * get_stability(search->board.opponent, search->board.player);
 	search->stability_bound.lower = 2 * get_stability(search->board.player, search->board.opponent) - SCORE_MAX;
-    printf("Accesing search (->) result object.\n");
 	search->result->score = search_bound(search, search_eval_0(search));
-    printf("Initialised score object.\n");
 	search->result->n_moves_left = search->result->n_moves = search->movelist.n_moves;
 	search->result->book_move = false;
 
-    printf("Accesed result object.\n");
 
 	if (!movelist_is_empty(&search->movelist)) {
 		foreach_move(move, &search->movelist) {
@@ -874,7 +871,6 @@ int search_run(void *v)
 		search->result->bound[PASS].upper = SCORE_MAX;
 	}
 
-    printf("Successfully initialise search_run().\n");
 	// search using iterative deepening (& widening).
 	iterative_deepening(search, options.alpha, options.beta);
 

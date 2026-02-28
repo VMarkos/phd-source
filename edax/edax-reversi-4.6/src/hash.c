@@ -82,10 +82,7 @@ void hash_init(HashTable *hash_table, const size_t size)
  */
 void hash_cleanup(HashTable *hash_table)
 {
-	// printf("hash table @ %x\nhash @ %x\n", hash_table, hash_table->hash);
     assert(hash_table != NULL && hash_table->hash != NULL);
-    // printf("hash table: %x\n", hash_table);
-    // printf("hash table hash: %x\n", hash_table->hash);
 
 	size_t i = 0, hash_size = hash_table->hash_mask + HASH_N_WAY + 1;
 
@@ -118,29 +115,19 @@ void hash_cleanup(HashTable *hash_table)
 		h0 = _mm_load_si128(h);
 		h1 = _mm_load_si128(h + 1);
 		h2 = _mm_load_si128(h + 2);
-        // printf("hash table hash: %x\n", hash_table->hash);
 		h = (__m128i*) hash_table->hash;
-        // printf("h @ %x\n", h);
-        // printf("Hash size: %d\n", hash_size);
 		for (; i < hash_size - 2; i += 2, h += 3) {
-            // printf("i: %d, h: %d\n", i, h);
 			_mm_stream_si128(h, h0);
-            // printf("stream h\n");
 			_mm_stream_si128(h + 1, h1);
-            // printf("stream h + 1\n");
 			_mm_stream_si128(h + 2, h2);
-            // printf("stream h + 2\n");
 		}
-        // printf("branch completed\n");
 
 	#endif
 
 	_mm_sfence();
-    // printf("pass mm sfence\n");
 
 #endif
 
-    // printf("Determine SSE2 or AVX\n");
 	for (; i < hash_size; ++i) {
 		hash_table->hash[i] = HASH_INIT;
 	}

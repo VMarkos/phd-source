@@ -35,7 +35,7 @@ void agent_destroy(Agent** agent_p) {
 }
 
 bool agent_load_game(Agent* agent, const char* file) {
-    book_verbose = true;
+    // book_verbose = true;
     play_init(agent->play, agent->book); // Maybe load a book somehow here, even an empty one?
     agent->book->search = &agent->play->search;
     book_load(agent->book, options.book_file);
@@ -46,11 +46,8 @@ bool agent_load_game(Agent* agent, const char* file) {
 }
 
 int32_t agent_get_best_move(Agent* agent) {
-    printf("play go not run yet\n");
     play_go(agent->play, true);
-    printf("play_go run!\n");
     int32_t move_x = play_get_last_move(agent->play)->x;
-    printf("last move retrieved!\n");
     return move_x;
 }
 

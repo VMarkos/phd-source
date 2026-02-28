@@ -68,15 +68,11 @@ void play_new(Play *play)
 	play->time[0].spent = play->time[1].spent = 0;
 	play->board = play->initial_board;
 	play->player = play->initial_player;
-    // printf("play set clock board player\n");
 	play->ponder.board.player = play->ponder.board.opponent = 0;
-    // printf("play set pondering\n");
 	search_cleanup(&play->search);
-    // printf("search cleanup\n");
 	play->i_game = play->n_game = 0;
 	play->state = IS_WAITING;
 	play->result.move = NOMOVE; // missing more initialisation ?
-    // printf("play result move\n");
 	play->time[0].left = options.time;
 	play->time[1].left = options.time;
 	play->force.i_move = 0;
@@ -114,14 +110,9 @@ bool play_load(Play *play, const char *file)
 		return false;
 	}
     
-    // printf("game loaded from text\n");
-    // printf("\tgame address: %u\n", &game);
 	play->initial_board = game.initial_board;
-    // printf("initial board accessed\n");
 	play->initial_player = game.player;
-    // printf("initial player accessed\n");
 	play_new(play);
-    // printf("play loaded from text\n");
 	for (i = 0; i < 60 && game.move[i] != NOMOVE; ++i) {
 		if (play_must_pass(play)) play_move(play, PASS);
 		if (!play_move(play, game.move[i])) {
@@ -235,11 +226,7 @@ void play_go(Play *play, const bool update)
 
 	if (play_is_game_over(play)) return;
 
-    printf("not game over!\n");
-    printf("options @ %x\n", &options);
-    printf("\tbook allowed: %d\n", options.book_allowed);
 	if (play_force_go(play, &move)) {
-        printf("play force go\n");
 		play_stop_pondering(play);
 
 		play->result.depth = 0;
@@ -257,7 +244,6 @@ void play_go(Play *play, const bool update)
 		}
 
 	} else if (options.book_allowed && book_get_random_move(play->book, &play->board, &move, options.book_randomness)) {
-        printf("book allowed\n");
 		play_stop_pondering(play);
 
 		play->result.depth = 0;
@@ -287,7 +273,6 @@ void play_go(Play *play, const bool update)
 			}
 		}
 	} else if (play->state == IS_PONDERING && board_equal(&play->board, &play->ponder.board)) {
-        printf("state is thinking\n");
 		play->state = IS_THINKING;
 
 		search->options.verbosity = options.verbosity;
@@ -325,7 +310,6 @@ void play_go(Play *play, const bool update)
 
 	} else {
 
-        printf("prepare to think\n");
 		play_stop_pondering(play);
 
 		play->state = IS_THINKING;
@@ -1170,16 +1154,11 @@ void play_force_restore(Play *play)
  */
 bool play_force_go(Play *play, Move *move)
 {
-    printf("pfg\n");
 	Board unique;
 	Board sym;
 	int s, x;
 
-    printf("play: %x\n", play);
-    printf("play->force: %x\n", play->force);
-    printf("\ti_move: %x | n_move: %x\n", play->force.i_move, play->force.n_move);
 	if (play->force.i_move < play->force.n_move) {
-        printf("imove < nmove\n");
 		if (board_equal(&play->board, play->force.real + play->force.i_move)) {
 			*move = play->force.move[play->force.i_move];
 			return true;
@@ -1198,7 +1177,6 @@ bool play_force_go(Play *play, Move *move)
 		}
 	}
     
-    printf("False!\n");
 	return false;
 }
 
