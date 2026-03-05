@@ -50,9 +50,3 @@ int32_t agent_get_best_move(Agent* agent) {
     int32_t move_x = play_get_last_move(agent->play)->x;
     return move_x;
 }
-
-// Thin wrapper around `board_set()`.
-/* void agent_parse_board_string(const char* board_string, Board* board) {
-    board_set(board, board_string);
-    // board_from_FEN(board, board_string);
-}*/

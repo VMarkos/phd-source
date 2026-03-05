@@ -6,3 +6,4 @@ void* mallocate(size_t size) {
     if (p == NULL) exit(1);
     return p;
 }
+
