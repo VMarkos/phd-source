@@ -19,6 +19,7 @@ Dataset* dataset_create(size_t*, size_t);
 void dataset_destroy(Dataset**);
 void dataset_add_row(Dataseet*, Row*);
 void dataset_write(Dataset*, const char*);
+void dataset_read(Dataset*, const char*);
 
 Row* row_create(uint64_t, uint64_t, int*);
 void row_destroy(Row**);

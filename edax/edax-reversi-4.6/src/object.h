@@ -26,5 +26,8 @@
 void* mallocate(size_t);
 void* callocate(size_t);
 void safe_fwrite(const void*, size_t, size_t, FILE*);
+void safe_fread(const void*, size_t, size_t, FILE*);
+void safe_fseek(FILE*, long, int);
+void safe_offset_read(const void*, size_t, size_t, FILE*, long);
 
 #endif

@@ -47,6 +47,16 @@ void dataset_write(Dataset* dataset, const char* file) {
     fclose(dataset_fp);
 }
 
+void dataset_read(Dataset* dataset, const char* file) {
+    FILE* dataset_fp = fopen(file, "rb");
+    if (dataset_fp == NULL) exit(1);
+    rewind(dataset_fp);
+    safe_fread(&dataset->n_rows, sizeof(size_t), 1, dataset_fp);
+    safe_offset_read(&dataset->n_depths, sizeof(size_t), 1, dataset_fp, sizeof(size_t));
+    // TODO: Read each depth and then rows.
+    fclose(dataset_fp);
+}
+
 // Rows
 
 Row* row_create(uint64_t player, uint64_t opponent, int* moves) {
