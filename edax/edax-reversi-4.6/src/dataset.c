@@ -51,8 +51,14 @@ void dataset_read(Dataset* dataset, const char* file) {
     FILE* dataset_fp = fopen(file, "rb");
     if (dataset_fp == NULL) exit(1);
     rewind(dataset_fp);
+    long offset = 0;
     safe_fread(&dataset->n_rows, sizeof(size_t), 1, dataset_fp);
-    safe_offset_read(&dataset->n_depths, sizeof(size_t), 1, dataset_fp, sizeof(size_t));
+    offset += sizeof(size_t);
+    safe_offset_read(&dataset->n_depths, sizeof(size_t), 1, dataset_fp, offset);
+    offset += sizeof(size_t);
+    safe_offset_read(&dataset->depths, sizeof(int), dataset->n_depths, dataset_fp, offset);
+    offset += sizeof(int) * dataset->n_depths;
+    safe_offset_read(&dataset->rows, sizeof(Row), dataset->n_rows, dataset_fp, offset);
     // TODO: Read each depth and then rows.
     fclose(dataset_fp);
 }
