@@ -59,7 +59,6 @@ void dataset_read(Dataset* dataset, const char* file) {
     safe_offset_read(&dataset->depths, sizeof(int), dataset->n_depths, dataset_fp, offset);
     offset += sizeof(int) * dataset->n_depths;
     safe_offset_read(&dataset->rows, sizeof(Row), dataset->n_rows, dataset_fp, offset);
-    // TODO: Read each depth and then rows.
     fclose(dataset_fp);
 }
 
